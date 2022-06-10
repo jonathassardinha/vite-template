@@ -8,7 +8,7 @@ describe('<<%=Name%> />', () => {
   it('should render properly', () => {
     render(<<%=Name%>>Test</<%=Name%>>);
 
-    expect(screen.getByText("<%=Name%>")).toBeInTheDocument();
-    expect(screen.getByText("Test")).toBeInTheDocument();
+    expect(screen.getByText(/<%=name%>/i)).toBeInTheDocument();
+    expect(screen.getByText(/test/i)).toBeInTheDocument();
   })
 })
