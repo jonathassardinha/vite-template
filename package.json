@@ -15,7 +15,8 @@
     "prettier:check": "npx prettier --check .",
     "lint": "eslint ./ --fix",
     "lint:check": "eslint ./",
-    "types:check": "tsc --noemit"
+    "types:check": "tsc --noemit",
+    "ci:local": "yarn types:check && yarn lint:check && yarn prettier:check && yarn test --run"
   },
   "dependencies": {
     "react": "^18.0.0",

@@ -1,0 +1,45 @@
+name: Pull Request
+
+on: [pull_request]
+
+jobs:
+  lint-prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use projects Node version
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+      - run: npm install -g yarn
+      - run: yarn --frozen-lockfile
+      - run: yarn types:check
+      - run: yarn lint:check
+      - run: yarn prettier:check
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use projects Node version
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+      - run: npm install -g yarn
+      - run: yarn --frozen-lockfile
+      - run: yarn test --run
+
+  # e2e-tests:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Use projects Node version
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version-file: '.nvmrc'
+  #         cache: 'yarn'
+  #     - run: npm install -g yarn
+  #     - run: yarn --frozen-lockfile
+  #     - run: yarn cy:ci
